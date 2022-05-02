@@ -10,8 +10,8 @@ import pandas
 Dataframe import and splitting them into traindata and labels
 """
 #train_df = table_to_frame(in_data)
-df_train = pandas.read_csv('regularized_train.csv').iloc[:,1:]
-df_train_labels = pandas.read_csv('regularized_train_labels.csv').iloc[:,1:]
+df_train = pandas.read_csv('./regularized_datasets/regularized_train.csv').iloc[:,1:]
+df_train_labels = pandas.read_csv('./regularized_datasets/regularized_train_labels.csv').iloc[:,1:]
 
 
 # df_test = pandas.read_csv('test.csv')

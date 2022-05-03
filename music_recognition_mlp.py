@@ -68,7 +68,7 @@ criterion = nn.CrossEntropyLoss()
 music_params, labels = next(iter(train_loader))
 
 # optimizer/learner
-optimizer = optim.Adam(model_ann.parameters(), lr=0.0001)
+optimizer = optim.Adam(model_ann.parameters(), lr=0.001)
 time0 = time() # take note of start time for timing of the process
 epochs = 0
 mean_loss = 3

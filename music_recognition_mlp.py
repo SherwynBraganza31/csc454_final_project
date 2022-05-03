@@ -1,6 +1,5 @@
 import torch
 from time import time
-from torchvision import datasets, transforms
 from torch import nn, optim
 from torch.utils.data import Dataset
 from Orange.data.pandas_compat import table_from_frame, table_to_frame
@@ -10,13 +9,8 @@ import pandas
 Dataframe import and splitting them into traindata and labels
 """
 #train_df = table_to_frame(in_data)
-df_train = pandas.read_csv('./regularized_datasets/regularized_train.csv').iloc[:,1:]
-df_train_labels = pandas.read_csv('./regularized_datasets/regularized_train_labels.csv').iloc[:,1:]
-
-
-# df_test = pandas.read_csv('test.csv')
-# df_test = df_test.iloc[:,2:-1]
-# df_test_labels = pandas.read_csv('test_labels.csv')
+df_train = pandas.read_csv('./regularized_datasets/regularized_train2.csv').iloc[:,1:]
+df_train_labels = pandas.read_csv('./regularized_datasets/regularized_train_labels2.csv').iloc[:,1:]
 
 class MyDataset(Dataset):
 
@@ -35,7 +29,7 @@ class MyDataset(Dataset):
         return self.x_train[idx], self.y_train[idx]
 
 train_loader=torch.utils.data.DataLoader(MyDataset([df_train, df_train_labels]),batch_size=256,shuffle=False)
-#test_loader=torch.utils.data.DataLoader(MyDataset([df_test, df_test_labels]),batch_size=10,shuffle=True)
+
 
 # Layer HyperParameters
 input_size = 14 # input layer
@@ -73,7 +67,7 @@ time0 = time() # take note of start time for timing of the process
 epochs = 0
 mean_loss = 3
 
-while mean_loss > 0.8:
+while epochs < 300:
     running_loss = 0
     for music_params, labels in train_loader:
         # Flatten MNIST images into a 784 long vector
@@ -100,6 +94,8 @@ while mean_loss > 0.8:
 
 timestamp = time() - time0
 print("\nTraining Time (in minutes) =", timestamp/60)
+
+torch.save(model_ann.state_dict(), "music_recognition_mlp.sav")
 
 
 

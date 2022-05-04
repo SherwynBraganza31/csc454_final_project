@@ -1,14 +1,14 @@
 import torch
 from time import time
 from torch import nn, optim
-from mlp_model import MLP_ANN, DatasetGen
+from model import MLP_ANN, DatasetGen, CNN
 from Orange.data.pandas_compat import table_from_frame, table_to_frame
+from torchvision import transforms
 import pandas
 
 """
 Dataframe import and splitting them into traindata and labels
 """
-#train_df = table_to_frame(in_data)
 df_train = pandas.read_csv('./regularized_datasets/regularized_train.csv').iloc[:,1:]
 df_train_labels = pandas.read_csv('./regularized_datasets/regularized_train_labels.csv').iloc[:,1:]
 
@@ -32,9 +32,6 @@ while abs(old_mean_loss-mean_loss) > 0.00001:
     running_loss = 0
     old_mean_loss = mean_loss
     for music_params, labels in train_loader:
-        # Flatten MNIST images into a 784 long vector
-        music_params = music_params.view(music_params.shape[0], -1)
-
         # Training pass
         optimizer.zero_grad()
 

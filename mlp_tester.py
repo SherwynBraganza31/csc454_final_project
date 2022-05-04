@@ -2,7 +2,7 @@ import torch
 from time import time
 from torch import nn, optim
 from torch.utils.data import Dataset
-from mlp_model import MLP_ANN, DatasetGen
+from model import MLP_ANN, DatasetGen
 from Orange.data.pandas_compat import table_from_frame, table_to_frame
 import pandas
 

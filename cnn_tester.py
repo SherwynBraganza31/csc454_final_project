@@ -7,7 +7,7 @@ df_test = pandas.read_csv('./regularized_datasets/regularized_test.csv').iloc[:,
 df_test_labels = pandas.read_csv('./regularized_datasets/regularized_test_labels.csv').iloc[:,1:]
 
 batch = 4
-test_loader = torch.utils.data.DataLoader(DatasetGen([df_test, df_test_labels]),batch_size=batch,shuffle=True)
+test_loader = torch.utils.data.DataLoader(DatasetGen([df_test, df_test_labels]),batch_size=batch,shuffle=False)
 
 model_cnn = CNN()
 

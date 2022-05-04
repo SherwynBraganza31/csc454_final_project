@@ -46,8 +46,9 @@ class CNN(nn.Module):
             nn.Conv2d(
                 in_channels=1,  # 1 input channel
                 out_channels=16, # 16 output channels
-                kernel_size=(5,5), # sliding window matrix of size (5,5)
-                stride=(1,1), # Move the window by the stride value
+                kernel_size=(2,2),
+                stride=(1,1),
+                padding=(13,0)
             ),
             nn.ReLU(), # activation function
             nn.MaxPool2d(kernel_size=2), # pooling function with window matrix of size (2,2)
@@ -55,12 +56,13 @@ class CNN(nn.Module):
 
         # same as above but few changes to input and output layers
         self.conv2 = nn.Sequential(
-            nn.Conv2d(16, 32, (5,5), (1,1)),
+            nn.Conv2d(16, 32, (2,2),(1,1),(13,0)),
             nn.ReLU(),
             nn.MaxPool2d(2),
         )
 
-        self.out = nn.Linear(32 * 7 * 7, 11)
+        self.out = nn.Sequential(nn.Linear(1216, 11),
+                                 nn.Softmax(dim=1))
 
     def forward(self, x):
         x = self.conv1(x)
@@ -68,7 +70,7 @@ class CNN(nn.Module):
         # flatten the output of conv2 to (batch_size, 32 * 7 * 7)
         x = x.view(x.size(0), -1)
         output = self.out(x)
-        return output, x  # return x for visualization
+        return output # return x for visualization
 
 class DatasetGen(Dataset):
     def __init__(self, data):

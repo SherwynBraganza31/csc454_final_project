@@ -1,9 +1,6 @@
 import torch
-from time import time
-from torch import nn, optim
 from torch.utils.data import Dataset
 from model import MLP_ANN, DatasetGen
-from Orange.data.pandas_compat import table_from_frame, table_to_frame
 import pandas
 
 df_test = pandas.read_csv('./regularized_datasets/regularized_test.csv').iloc[:,1:]

@@ -27,7 +27,7 @@ mean_loss = 3
 old_mean_loss = 0
 
 # train till the cross entropy stabilizes
-while abs(old_mean_loss-mean_loss) < 0.00001:
+while abs(old_mean_loss-mean_loss) > 0.00001:
     running_loss = 0
     old_mean_loss = mean_loss
     for music_params, labels in train_loader:

@@ -10,7 +10,7 @@ Dataframe import and splitting them into traindata and labels
 df_train = pandas.read_csv('./regularized_datasets/regularized_train.csv').iloc[:,1:]
 df_train_labels = pandas.read_csv('./regularized_datasets/regularized_train_labels.csv').iloc[:,1:]
 
-train_loader = torch.utils.data.DataLoader(DatasetGen([df_train, df_train_labels]),batch_size=256,shuffle=False)
+train_loader = torch.utils.data.DataLoader(DatasetGen([df_train, df_train_labels]),batch_size=256,shuffle=True)
 
 model_ann = MLP_ANN()
 
